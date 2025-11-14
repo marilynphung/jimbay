@@ -172,12 +172,45 @@ function switchToMainLayout(cityValue) {
     updateCAS(cityValue);
 }
 
+function returnToHome() {
+    appContainer.classList.add('centered');
+    appContainer.classList.remove('city-selected');
+    mainLayout.classList.remove('active');
+    
+    // Réinitialiser les valeurs
+    villeSelect.value = '';
+    villeSelect2.value = '';
+    aqiValue.textContent = '-';
+    aqiStatus.textContent = '-';
+    aqiBar.style.height = '0%';
+    aqiBar.textContent = 'CAS: -';
+    
+    // Cacher le CASP
+    const caspBox = document.getElementById('caspBox');
+    const caspBar = document.getElementById('caspBar');
+    caspBox.style.display = 'none';
+    caspBar.style.display = 'none';
+    
+    // Réinitialiser le formulaire
+    caspForm.reset();
+}
+
 villeSelect.addEventListener('change', function(e) {
     if (this.value) {
         console.log('Ville sélectionnée:', this.value);
         switchToMainLayout(this.value);
     }
 });
+
+// Event listener pour le logo - retour à l'accueil
+const logoSmall = document.querySelector('.logo-small');
+logoSmall.addEventListener('click', function() {
+    console.log('Retour à l\'accueil');
+    returnToHome();
+});
+
+// Ajouter un style cursor pointer au logo
+logoSmall.style.cursor = 'pointer';
 
 villeSelect2.addEventListener('change', function(e) {
     if (this.value) {
@@ -208,9 +241,9 @@ caspForm.addEventListener('submit', async function(e) {
     const poid_activite_physique = 0.9;
     
     const ageMinEnfant = 0;
-    const ageMaxEnfant = 5;
-    const ageMinSenior = 70;
-    const ageMaxSenior = 100;
+    const ageMaxEnfant = 14;
+    const ageMinSenior = 65;
+    const ageMaxSenior = 120;
     const Age = ((age >= ageMinEnfant && age <= ageMaxEnfant) || (age >= ageMinSenior && age <= ageMaxSenior)) ? 1 : 0;
     
     const ProbRespiratoire = respiratory ? 1 : 0;
@@ -282,9 +315,9 @@ async function recalculateCASP(ville) {
     const poid_activite_physique = 0.9;
     
     const ageMinEnfant = 0;
-    const ageMaxEnfant = 5;
-    const ageMinSenior = 70;
-    const ageMaxSenior = 100;
+    const ageMaxEnfant = 14;
+    const ageMinSenior = 65;
+    const ageMaxSenior = 120;
     const Age = ((age >= ageMinEnfant && age <= ageMaxEnfant) || (age >= ageMinSenior && age <= ageMaxSenior)) ? 1 : 0;
     
     const ProbRespiratoire = respiratory ? 1 : 0;

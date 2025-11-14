@@ -60,12 +60,35 @@
                     <option value="saint-bruno-de-montarville">Saint-Bruno-de-Montarville</option>
                 </select>
             </div>
+
+            <div class="info-panel">
+                <h2>Comment fonctionne notre calculateur CASP?</h2>
+                
+                <div class="info-section">
+                    <p>Notre prototype utilise la <strong>Cote d'Air Santé (CAS)</strong>, un indice de 1 à 10 fourni par les autorités de santé publique selon la qualité de l'air.</p>
+                    <p>Nous proposons la <strong>Cote d'Air Santé Personnalisée (CASP)</strong> qui adapte la CAS selon vos caractéristiques personnelles: âge, problèmes respiratoires et niveau d'activité physique.</p>
+                </div>
+
+                <div class="info-section">
+                    <h3>📊 Facteurs d'ajustement</h3>
+                    <ul>
+                        <li><strong>Âge:</strong> Groupes sensibles (0-14 ans ou 65-120 ans)</li>
+                        <li><strong>Santé respiratoire:</strong> Présence de conditions respiratoires</li>
+                        <li><strong>Activité physique:</strong> De sédentaire à très actif</li>
+                    </ul>
+                </div>
+
+                <div class="info-section">
+                    <h3>📌 À propos du prototype</h3>
+                    <p>Ce prototype démontre comment adapter un indice de santé publique aux besoins individuels. Les poids actuels sont conceptuels et pourront être ajustés avec des données cliniques validées dans une version future.</p>
+                </div>
+            </div>
         </div>
 
         <div class="main-layout">
             <div class="main-header">
                 <img src="assets/logo.png" alt="Jimbay Logo" class="logo-small">
-                <h1 class="page-title">Trouve ma côte d’air santé personnalisée</h1>
+                <h1 class="page-title">Trouve ma côte d'air santé personnalisée</h1>
             </div>
             
             <div class="content-wrapper">
@@ -125,11 +148,11 @@
 
                                 <div class="form-group">
                                     <label for="age">Mon âge</label>
-                                    <input type="number" id="age" name="age" min="0" max="120" placeholder="Entrez votre âge" required>
+                                    <input type="number" id="age" name="age" min="0" max="120" placeholder="Entrez votre âge en années" required>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="activity">Mon niveau d’activité physique</label>
+                                    <label for="activity">Mon niveau d'activité physique</label>
                                     <select id="activity" name="activity" required>
                                         <option value="">-- Choisir un niveau --</option>
                                         <option value="sedentaire">Sédentaire (peu ou pas d'exercice)</option>
@@ -140,12 +163,34 @@
                                     </select>
                                 </div>
 
-                                <div class="form-group">
-                                    <div class="checkbox-group">
-                                        <input type="checkbox" id="respiratory" name="respiratory" value="yes">
-                                        <label for="respiratory">J’ai une condition respiratoire</label>
-                                    </div>
-                                </div>
+<div class="form-group">
+    <div class="checkbox-row">
+        
+        <!-- LEFT SIDE -->
+        <div class="checkbox-left">
+            <input type="checkbox" id="respiratory" name="respiratory" value="yes">
+            <label for="respiratory">J'ai une condition respiratoire</label>
+        </div>
+
+        <!-- RIGHT SIDE: SVG ICON -->
+        <span class="info-icon" data-tooltip="Exemples : Asthme, MPOC (bronchite chronique, emphysème), Fibrose pulmonaire, Allergies respiratoires sévères, Apnée du sommeil">
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                width="16"
+                height="16"
+                aria-hidden="true"
+            >
+                <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1.8"></circle>
+                <line x1="12" y1="10" x2="12" y2="16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></line>
+                <circle cx="12" cy="7" r="1" fill="currentColor"></circle>
+            </svg>
+        </span>
+
+    </div>
+</div>
+
+
 
                                 <button type="submit" class="submit-button">Générer ma CASP</button>
                             </div>
