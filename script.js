@@ -236,9 +236,9 @@ caspForm.addEventListener('submit', async function(e) {
     const CAS = await fetchRealAQI(ville);
     
     const intensite = 1;
-    const poid_age = 0.6;
-    const poid_ProbRespiratoire = 0.2;
-    const poid_activite_physique = 0.9;
+    const poid_age = 0.5;
+    const poid_ProbRespiratoire = 0.5;
+    const poid_activite_physique = 0.5;
     
     const ageMinEnfant = 0;
     const ageMaxEnfant = 14;
@@ -310,9 +310,9 @@ async function recalculateCASP(ville) {
     const CAS = await fetchRealAQI(ville);
     
     const intensite = 1;
-    const poid_age = 0.6;
-    const poid_ProbRespiratoire = 0.2;
-    const poid_activite_physique = 0.9;
+    const poid_age = 0.5;
+    const poid_ProbRespiratoire = 0.5;
+    const poid_activite_physique = 0.5;
     
     const ageMinEnfant = 0;
     const ageMaxEnfant = 14;
