@@ -52,6 +52,33 @@ const cityNames = {
     'saint-bruno-de-montarville': 'Saint-Bruno-de-Montarville, Quebec'
 };
 
+// Villes qui utilisent les données d'une autre ville
+const cityAssociations = {
+    'terrebonne': 'laval',
+    'repentigny': 'laval',
+    'saint-jerome': 'laval',
+    'blainville': 'laval',
+    'saint-hyacinthe': 'montreal',
+    'dollard-des-ormeaux': 'montreal',
+    'victoriaville': 'trois-rivieres',
+    'rimouski': 'quebec',
+    'saint-eustache': 'laval',
+    'mascouche': 'laval',
+    'saint-georges': 'quebec',
+    'alma': 'saguenay',
+    'mirabel': 'laval',
+    'val-d-or': 'rouyn-noranda',
+    'thetford-mines': 'quebec',
+    'saint-constant': 'brossard',
+    'joliette': 'sorel-tracy',
+    'sainte-julie': 'longueuil',
+    'vaudreuil-dorion': 'montreal',
+    'matane': 'saguenay',
+    'varennes': 'longueuil',
+    'saint-bruno-de-montarville': 'longueuil'
+};
+
+// Données de secours pour les villes principales
 const fallbackCASData = {
     'montreal': 3,
     'quebec': 2,
@@ -62,37 +89,15 @@ const fallbackCASData = {
     'saguenay': 2,
     'levis': 2,
     'trois-rivieres': 2,
-    'terrebonne': 3,
     'saint-jean-sur-richelieu': 2,
-    'repentigny': 3,
     'brossard': 3,
     'drummondville': 2,
-    'saint-jerome': 2,
     'granby': 2,
-    'blainville': 3,
-    'saint-hyacinthe': 2,
     'shawinigan': 2,
-    'dollard-des-ormeaux': 3,
     'pointe-claire': 3,
-    'victoriaville': 2,
-    'rimouski': 2,
-    'saint-eustache': 3,
     'sorel-tracy': 2,
-    'mascouche': 3,
-    'saint-georges': 2,
-    'alma': 2,
-    'mirabel': 2,
-    'val-d-or': 2,
     'rouyn-noranda': 2,
-    'thetford-mines': 2,
-    'sept-iles': 1,
-    'saint-constant': 3,
-    'joliette': 2,
-    'sainte-julie': 3,
-    'vaudreuil-dorion': 3,
-    'matane': 2,
-    'varennes': 3,
-    'saint-bruno-de-montarville': 3
+    'sept-iles': 1
 };
 
 function convertAQItoCAS(aqi) {
@@ -105,7 +110,11 @@ function convertAQItoCAS(aqi) {
 
 async function fetchRealAQI(city) {
     try {
-        const cityName = cityNames[city];
+        // Si la ville a une association, utiliser la ville parent
+        const targetCity = cityAssociations[city] || city;
+        const cityName = cityNames[targetCity];
+        
+        console.log(`Fetching data for ${city}${targetCity !== city ? ` (using ${targetCity} data)` : ''}`);
         
         const response = await fetch(`https://api.waqi.info/feed/${encodeURIComponent(cityName)}/?token=${WAQI_TOKEN}`);
         
@@ -119,13 +128,14 @@ async function fetchRealAQI(city) {
             const aqi = data.data.aqi;
             return convertAQItoCAS(aqi);
         } else {
-            console.log(`No AQI data found for ${city}, using fallback`);
-            return fallbackCASData[city] || 2;
+            console.log(`No AQI data found for ${targetCity}, using fallback`);
+            return fallbackCASData[targetCity] || 2;
         }
         
     } catch (error) {
         console.error('Error fetching AQI data:', error);
-        return fallbackCASData[city] || 2;
+        const targetCity = cityAssociations[city] || city;
+        return fallbackCASData[targetCity] || 2;
     }
 }
 
