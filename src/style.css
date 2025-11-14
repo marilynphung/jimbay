@@ -53,14 +53,16 @@ body {
 
 .main-header {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    gap: 40px;
+    gap: 20px;
+    text-align: center;
+    margin-bottom: 30px;
 }
 
 .logo-small {
-    max-width: 150px;
+    max-width: 200px;
     height: auto;
-    flex-shrink: 0;
 }
 
 .page-title {
@@ -68,7 +70,6 @@ body {
     color: #333;
     font-weight: 600;
     margin: 0;
-    flex: 1;
 }
 
 .content-wrapper {
@@ -84,7 +85,7 @@ body {
 }
 
 .main-form {
-    background: #e1f4da;
+    background: #c2e9b4;
     padding: 25px;
     border-radius: 15px;
     box-shadow: 0 4px 15px rgba(123, 201, 111, 0.15);
@@ -220,18 +221,18 @@ select:focus {
     font-size: 18px;
     font-weight: 600;
     color: white;
-    background: #7bc96f;
+    background: #6AB35F;
     border: none;
     border-radius: 8px;
     cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 10px rgba(123, 201, 111, 0.3);
+    box-shadow: 0 4px 10px rgba(111, 201, 124, 0.4);
 }
 
 .submit-button:hover {
-    background: #6ab35f;
+    background: #6AB35F;
     transform: translateY(-2px);
-    box-shadow: 0 6px 15px rgba(123, 201, 111, 0.4);
+    box-shadow: 0 6px 15px rgba(111, 201, 124, 0.4);
 }
 
 .submit-button:active {
@@ -348,9 +349,12 @@ select:focus {
 
 @media (max-width: 968px) {
     .main-header {
-        flex-direction: column;
-        align-items: flex-start;
         gap: 15px;
+        margin-bottom: 20px;
+    }
+    
+    .logo-small {
+        max-width: 150px;
     }
     
     .page-title {

@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jimbay</title>
+
+    <!-- External CSS -->
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -63,7 +65,7 @@
         <div class="main-layout">
             <div class="main-header">
                 <img src="/assets/logo.png" alt="Jimbay Logo" class="logo-small">
-                <h1 class="page-title">Trouve ma côte d'air santé personnalisé</h1>
+                <h1 class="page-title">Trouve ma côte d'air santé personnalisée</h1>
             </div>
             
             <div class="content-wrapper">
@@ -74,6 +76,7 @@
                                 <label for="ville2">Ville sélectionnée</label>
                                 <select id="ville2" name="ville" required>
                                     <option value="">-- Choisir une ville --</option>
+                                    <!-- same list duplicated exactly -->
                                     <option value="montreal">Montréal</option>
                                     <option value="quebec">Québec</option>
                                     <option value="laval">Laval</option>
@@ -169,19 +172,18 @@
                         </div>
 
                         <div class="combined-chart">
-                            <div class="aqi-bar" id="aqiBar" style="height: 0%;">
-                                CAS: -
-                            </div>
-                            <div class="casp-bar" id="caspBar" style="height: 0%; display: none;">
-                                CASP: -
-                            </div>
+                            <div class="aqi-bar" id="aqiBar" style="height: 0%;">CAS: -</div>
+                            <div class="casp-bar" id="caspBar" style="height: 0%; display: none;">CASP: -</div>
                         </div>
+
                     </div>
                 </div>
+
             </div>
         </div>
     </div>
 
+    <!-- External JS -->
     <script src="script.js"></script>
 </body>
 </html>

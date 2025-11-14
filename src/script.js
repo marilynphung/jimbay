@@ -96,11 +96,11 @@ const fallbackCASData = {
 };
 
 function convertAQItoCAS(aqi) {
-    if (aqi <= 50) return Math.max(1, Math.round(aqi / 50 * 3)); // 0-50 AQI = 1-3 CAS
-    if (aqi <= 100) return Math.round(3 + (aqi - 50) / 50 * 3); // 51-100 AQI = 4-6 CAS
-    if (aqi <= 150) return Math.round(6 + (aqi - 100) / 50 * 2); // 101-150 AQI = 7-8 CAS
-    if (aqi <= 200) return Math.min(9, Math.round(8 + (aqi - 150) / 50 * 1)); // 151-200 AQI = 9 CAS
-    return 10; // 200+ AQI = 10+ CAS
+    if (aqi <= 50) return Math.max(1, Math.round(aqi / 50 * 3));
+    if (aqi <= 100) return Math.round(3 + (aqi - 50) / 50 * 3);
+    if (aqi <= 150) return Math.round(6 + (aqi - 100) / 50 * 2);
+    if (aqi <= 200) return Math.min(9, Math.round(8 + (aqi - 150) / 50 * 1));
+    return 10;
 }
 
 async function fetchRealAQI(city) {
@@ -137,7 +137,6 @@ function getCASStatus(value) {
 }
 
 async function updateCAS(city) {
-    // Show loading state
     aqiValue.textContent = '...';
     aqiStatus.textContent = 'Chargement...';
     
