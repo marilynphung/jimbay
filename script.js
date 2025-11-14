@@ -455,3 +455,19 @@ async function recalculateCASP(ville) {
     
     console.log('CASP recalculé pour nouvelle ville:', { ville, CAS, CASP });
 }
+
+// --- Info-bulle toggle on click ---
+document.querySelectorAll('.info-icon').forEach(icon => {
+    icon.addEventListener('click', function (e) {
+        e.stopPropagation();
+
+        // Toggle une classe
+        this.classList.toggle('tooltip-active');
+    });
+});
+
+// Fermer la bulle quand on clique ailleurs
+document.addEventListener('click', () => {
+    document.querySelectorAll('.info-icon.tooltip-active')
+        .forEach(icon => icon.classList.remove('tooltip-active'));
+});

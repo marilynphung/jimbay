@@ -543,6 +543,12 @@ select:focus {
     font-weight: 600;
 }
 
+.info-icon.tooltip-active::before,
+.info-icon.tooltip-active::after {
+    opacity: 1;
+    visibility: visible;
+}
+
 .recommendation-card {
     background: white;
     padding: 20px;
