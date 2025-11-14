@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jimbay</title>
+    <title>SensAir</title>
 
     <!-- External CSS -->
     <link rel="stylesheet" href="style.css">
@@ -99,7 +99,6 @@
                                 <label for="ville2">Ma ville actuelle</label>
                                 <select id="ville2" name="ville" required>
                                     <option value="">-- Choisir une ville --</option>
-                                    <!-- same list duplicated exactly -->
                                     <option value="montreal">Montréal</option>
                                     <option value="quebec">Québec</option>
                                     <option value="laval">Laval</option>
@@ -152,45 +151,32 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="activity">Mon niveau d'activité physique</label>
+                                    <label for="activity">Intensité prévue de mon activité physique</label>
                                     <select id="activity" name="activity" required>
                                         <option value="">-- Choisir un niveau --</option>
-                                        <option value="sedentaire">Sédentaire (peu ou pas d'exercice)</option>
-                                        <option value="leger">Léger (exercice 1-2 fois/semaine)</option>
-                                        <option value="modere">Modéré (exercice 3-4 fois/semaine)</option>
-                                        <option value="actif">Actif (exercice 5-6 fois/semaine)</option>
-                                        <option value="tres-actif">Très actif (exercice quotidien intense)</option>
+                                        <option value="sedentaire">Très léger</option>
+                                        <option value="leger">Léger</option>
+                                        <option value="modere">Modéré</option>
+                                        <option value="actif">Élevé</option>
+                                        <option value="tres-actif">Très élevé</option>
                                     </select>
                                 </div>
 
-<div class="form-group">
-    <div class="checkbox-row">
-        
-        <!-- LEFT SIDE -->
-        <div class="checkbox-left">
-            <input type="checkbox" id="respiratory" name="respiratory" value="yes">
-            <label for="respiratory">J'ai une condition respiratoire</label>
-        </div>
-
-        <!-- RIGHT SIDE: SVG ICON -->
-        <span class="info-icon" data-tooltip="Exemples : Asthme, MPOC (bronchite chronique, emphysème), Fibrose pulmonaire, Allergies respiratoires sévères, Apnée du sommeil">
-            <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                width="16"
-                height="16"
-                aria-hidden="true"
-            >
-                <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1.8"></circle>
-                <line x1="12" y1="10" x2="12" y2="16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></line>
-                <circle cx="12" cy="7" r="1" fill="currentColor"></circle>
-            </svg>
-        </span>
-
-    </div>
-</div>
-
-
+                                <div class="form-group">
+                                    <div class="checkbox-row">
+                                        <div class="checkbox-left">
+                                            <input type="checkbox" id="respiratory" name="respiratory" value="yes">
+                                            <label for="respiratory">J'ai une condition respiratoire</label>
+                                        </div>
+                                        <span class="info-icon" data-tooltip="Exemples : Asthme, MPOC (bronchite chronique, emphysème), Fibrose pulmonaire, Allergies respiratoires sévères, Apnée du sommeil">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+                                                <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1.8"></circle>
+                                                <line x1="12" y1="10" x2="12" y2="16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></line>
+                                                <circle cx="12" cy="7" r="1" fill="currentColor"></circle>
+                                            </svg>
+                                        </span>
+                                    </div>
+                                </div>
 
                                 <button type="submit" class="submit-button">Générer ma CASP</button>
                             </div>
@@ -219,6 +205,17 @@
                         <div class="combined-chart">
                             <div class="aqi-bar" id="aqiBar" style="height: 0%;">CAS: -</div>
                             <div class="casp-bar" id="caspBar" style="height: 0%; display: none;">CASP: -</div>
+                        </div>
+
+                        <div class="recommendations-panel" id="recommendationsPanel" style="display: none;">
+                            <h3>Recommandations personnalisées</h3>
+                            <div class="recommendation-card" id="recommendationCard">
+                                <div class="recommendation-icon" id="recommendationIcon">ℹ️</div>
+                                <div class="recommendation-content">
+                                    <div class="recommendation-title" id="recommendationTitle"></div>
+                                    <div class="recommendation-text" id="recommendationText"></div>
+                                </div>
+                            </div>
                         </div>
 
                     </div>

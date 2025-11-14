@@ -1,3 +1,55 @@
+/*
+    ---------------------------------------------------------
+    LOGIQUE DU CALCUL CASP (Cote d’Air Santé Personnalisée)
+    ---------------------------------------------------------
+
+    Le CASP repose sur l’idée que certaines caractéristiques
+    individuelles peuvent modifier l’impact réel de la qualité 
+    de l’air sur une personne. Le calcul prend donc la CAS 
+    (Cote d’Air Santé officielle) et y applique un ajustement 
+    basé sur trois facteurs personnels :
+
+    1) Âge
+       - Les enfants (0-5 ans) et les personnes âgées (70-100 ans)
+         sont considérés comme des groupes plus sensibles.
+       - Si l’utilisateur appartient à l’un de ces groupes,
+         Age = 1, sinon Age = 0.
+
+    2) Condition respiratoire
+       - Si l’utilisateur indique avoir une condition respiratoire
+         (ex: asthme, MPOC, allergies sévères, etc.), alors
+         ProbRespiratoire = 1, sinon 0.
+
+    3) Niveau d’activité physique prévu
+       - Plus l’activité physique est intense, plus l’exposition
+         au polluant respiré augmente.
+       - Valeurs utilisées :
+           sédentaire → 0
+           léger      → 0.25
+           modéré     → 0.50
+           élevé      → 0.75
+           très actif → 1
+
+    Les poids choisis (poids_age, poids_respiratoire, 
+    poids_activité_physique) ne reflètent pas des données 
+    cliniques réelles. Ils servent uniquement à démontrer 
+    comment le système peut ajuster la CAS selon un profil 
+    individuel dans le cadre d’un prototype.
+
+    Formule finale utilisée :
+        CASP = CAS + intensite * (
+                    poids_age * Age +
+                    poids_respiratoire * ProbRespiratoire +
+                    poids_activite * ActivitePhysique
+                 )
+
+    Ce modèle a été conçu pour être facilement modifiable :
+    dans une version future, les poids pourraient être remplacés 
+    par des valeurs provenant de données scientifiques, de lignes 
+    directrices de santé publique ou d’études cliniques.
+*/
+
+
 const villeSelect = document.getElementById('ville');
 const villeSelect2 = document.getElementById('ville2');
 const appContainer = document.querySelector('.app-container');
@@ -188,8 +240,10 @@ function returnToHome() {
     // Cacher le CASP
     const caspBox = document.getElementById('caspBox');
     const caspBar = document.getElementById('caspBar');
+    const recommendationsPanel = document.getElementById('recommendationsPanel');
     caspBox.style.display = 'none';
     caspBar.style.display = 'none';
+    recommendationsPanel.style.display = 'none';
     
     // Réinitialiser le formulaire
     caspForm.reset();
@@ -224,6 +278,52 @@ villeSelect2.addEventListener('change', function(e) {
     }
 });
 
+function getRecommendations(casp, hasRespiratory, age) {
+    const isVulnerable = hasRespiratory || age <= 14 || age >= 65;
+    
+    let title, text, icon, color;
+    
+    if (casp <= 3) {
+        icon = '✅';
+        color = '#7bc96f';
+        title = 'Faible risque';
+        if (isVulnerable) {
+            text = 'Profitez de vos activités habituelles en plein air.';
+        } else {
+            text = 'Qualité de l\'air idéale pour les activités en plein air.';
+        }
+    } else if (casp <= 6) {
+        icon = '⚠️';
+        color = '#f9d71c';
+        title = 'Risque modéré';
+        if (isVulnerable) {
+            text = 'Envisagez de réduire ou de réorganiser les activités exténuantes en plein air si vous éprouvez des symptômes.';
+        } else {
+            text = 'Aucun besoin de modifier vos activités habituelles en plein air à moins d\'éprouver des symptômes comme la toux et une irritation de la gorge.';
+        }
+    } else if (casp <= 10) {
+        icon = '🚨';
+        color = '#f57c00';
+        title = 'Risque élevé';
+        if (isVulnerable) {
+            text = 'Réduisez ou réorganisez les activités exténuantes en plein air. Les enfants et les personnes âgées devraient également modérer leurs activités.';
+        } else {
+            text = 'Envisagez de réduire ou de réorganiser les activités exténuantes en plein air si vous éprouvez des symptômes comme la toux et une irritation de la gorge.';
+        }
+    } else {
+        icon = '⛔';
+        color = '#e53935';
+        title = 'Risque très élevé';
+        if (isVulnerable) {
+            text = 'Évitez les activités exténuantes en plein air. Les enfants et les personnes âgées devraient également éviter de se fatiguer en plein air.';
+        } else {
+            text = 'Réduisez ou réorganisez les activités exténuantes en plein air, particulièrement si vous éprouvez des symptômes comme la toux et une irritation de la gorge.';
+        }
+    }
+    
+    return { title, text, icon, color };
+}
+
 caspForm.addEventListener('submit', async function(e) {
     e.preventDefault();
     
@@ -238,7 +338,7 @@ caspForm.addEventListener('submit', async function(e) {
     const intensite = 1;
     const poid_age = 0.5;
     const poid_ProbRespiratoire = 0.5;
-    const poid_activite_physique = 0.5;
+    const poid_activite_physique = 0.2;
     
     const ageMinEnfant = 0;
     const ageMaxEnfant = 14;
@@ -300,6 +400,24 @@ function updateCASPDisplay(cas, casp) {
         ${caspStatusInfo.color}dd 10px,
         ${caspStatusInfo.color}dd 20px
     )`;
+    
+    // Afficher les recommandations
+    const age = parseInt(document.getElementById('age').value);
+    const hasRespiratory = document.getElementById('respiratory').checked;
+    const recommendations = getRecommendations(casp, hasRespiratory, age);
+    
+    const recommendationsPanel = document.getElementById('recommendationsPanel');
+    const recommendationIcon = document.getElementById('recommendationIcon');
+    const recommendationTitle = document.getElementById('recommendationTitle');
+    const recommendationText = document.getElementById('recommendationText');
+    const recommendationCard = document.getElementById('recommendationCard');
+    
+    recommendationsPanel.style.display = 'block';
+    recommendationIcon.textContent = recommendations.icon;
+    recommendationTitle.textContent = recommendations.title;
+    recommendationTitle.style.color = recommendations.color;
+    recommendationText.textContent = recommendations.text;
+    recommendationCard.style.borderLeftColor = recommendations.color;
 }
 
 async function recalculateCASP(ville) {
@@ -312,7 +430,7 @@ async function recalculateCASP(ville) {
     const intensite = 1;
     const poid_age = 0.5;
     const poid_ProbRespiratoire = 0.5;
-    const poid_activite_physique = 0.5;
+    const poid_activite_physique = 0.2;
     
     const ageMinEnfant = 0;
     const ageMaxEnfant = 14;
