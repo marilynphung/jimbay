@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jimbay</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="app-container centered">
+        <div class="initial-view">
+            <img src="/assets/logo.png" alt="Jimbay Logo" class="logo">
+            
+            <div class="selector-container">
+                <label for="ville">Sélectionnez votre ville</label>
+                <select id="ville" name="ville">
+                    <option value="">-- Choisir une ville --</option>
+                    <option value="montreal">Montréal</option>
+                    <option value="quebec">Québec</option>
+                    <option value="laval">Laval</option>
+                    <option value="gatineau">Gatineau</option>
+                    <option value="longueuil">Longueuil</option>
+                    <option value="sherbrooke">Sherbrooke</option>
+                    <option value="saguenay">Saguenay</option>
+                    <option value="levis">Lévis</option>
+                    <option value="trois-rivieres">Trois-Rivières</option>
+                    <option value="terrebonne">Terrebonne</option>
+                    <option value="saint-jean-sur-richelieu">Saint-Jean-sur-Richelieu</option>
+                    <option value="repentigny">Repentigny</option>
+                    <option value="brossard">Brossard</option>
+                    <option value="drummondville">Drummondville</option>
+                    <option value="saint-jerome">Saint-Jérôme</option>
+                    <option value="granby">Granby</option>
+                    <option value="blainville">Blainville</option>
+                    <option value="saint-hyacinthe">Saint-Hyacinthe</option>
+                    <option value="shawinigan">Shawinigan</option>
+                    <option value="dollard-des-ormeaux">Dollard-Des-Ormeaux</option>
+                    <option value="pointe-claire">Pointe-Claire</option>
+                    <option value="victoriaville">Victoriaville</option>
+                    <option value="rimouski">Rimouski</option>
+                    <option value="saint-eustache">Saint-Eustache</option>
+                    <option value="sorel-tracy">Sorel-Tracy</option>
+                    <option value="mascouche">Mascouche</option>
+                    <option value="saint-georges">Saint-Georges</option>
+                    <option value="alma">Alma</option>
+                    <option value="mirabel">Mirabel</option>
+                    <option value="val-d-or">Val-d'Or</option>
+                    <option value="rouyn-noranda">Rouyn-Noranda</option>
+                    <option value="thetford-mines">Thetford Mines</option>
+                    <option value="sept-iles">Sept-Îles</option>
+                    <option value="saint-constant">Saint-Constant</option>
+                    <option value="joliette">Joliette</option>
+                    <option value="sainte-julie">Sainte-Julie</option>
+                    <option value="vaudreuil-dorion">Vaudreuil-Dorion</option>
+                    <option value="matane">Matane</option>
+                    <option value="varennes">Varennes</option>
+                    <option value="saint-bruno-de-montarville">Saint-Bruno-de-Montarville</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="main-layout">
+            <div class="main-header">
+                <img src="/assets/logo.png" alt="Jimbay Logo" class="logo-small">
+                <h1 class="page-title">Trouve ma côte d'air santé personnalisé</h1>
+            </div>
+            
+            <div class="content-wrapper">
+                <div class="left-column">
+                    <div class="form-wrapper">
+                        <form id="caspForm" class="main-form">
+                            <div class="selector-container-in-form">
+                                <label for="ville2">Ville sélectionnée</label>
+                                <select id="ville2" name="ville" required>
+                                    <option value="">-- Choisir une ville --</option>
+                                    <option value="montreal">Montréal</option>
+                                    <option value="quebec">Québec</option>
+                                    <option value="laval">Laval</option>
+                                    <option value="gatineau">Gatineau</option>
+                                    <option value="longueuil">Longueuil</option>
+                                    <option value="sherbrooke">Sherbrooke</option>
+                                    <option value="saguenay">Saguenay</option>
+                                    <option value="levis">Lévis</option>
+                                    <option value="trois-rivieres">Trois-Rivières</option>
+                                    <option value="terrebonne">Terrebonne</option>
+                                    <option value="saint-jean-sur-richelieu">Saint-Jean-sur-Richelieu</option>
+                                    <option value="repentigny">Repentigny</option>
+                                    <option value="brossard">Brossard</option>
+                                    <option value="drummondville">Drummondville</option>
+                                    <option value="saint-jerome">Saint-Jérôme</option>
+                                    <option value="granby">Granby</option>
+                                    <option value="blainville">Blainville</option>
+                                    <option value="saint-hyacinthe">Saint-Hyacinthe</option>
+                                    <option value="shawinigan">Shawinigan</option>
+                                    <option value="dollard-des-ormeaux">Dollard-Des-Ormeaux</option>
+                                    <option value="pointe-claire">Pointe-Claire</option>
+                                    <option value="victoriaville">Victoriaville</option>
+                                    <option value="rimouski">Rimouski</option>
+                                    <option value="saint-eustache">Saint-Eustache</option>
+                                    <option value="sorel-tracy">Sorel-Tracy</option>
+                                    <option value="mascouche">Mascouche</option>
+                                    <option value="saint-georges">Saint-Georges</option>
+                                    <option value="alma">Alma</option>
+                                    <option value="mirabel">Mirabel</option>
+                                    <option value="val-d-or">Val-d'Or</option>
+                                    <option value="rouyn-noranda">Rouyn-Noranda</option>
+                                    <option value="thetford-mines">Thetford Mines</option>
+                                    <option value="sept-iles">Sept-Îles</option>
+                                    <option value="saint-constant">Saint-Constant</option>
+                                    <option value="joliette">Joliette</option>
+                                    <option value="sainte-julie">Sainte-Julie</option>
+                                    <option value="vaudreuil-dorion">Vaudreuil-Dorion</option>
+                                    <option value="matane">Matane</option>
+                                    <option value="varennes">Varennes</option>
+                                    <option value="saint-bruno-de-montarville">Saint-Bruno-de-Montarville</option>
+                                </select>
+                            </div>
+                            
+                            <div class="factors-panel">
+                                <h2>Facteurs de personnalisation</h2>
+
+                                <div class="form-group">
+                                    <label for="age">Âge</label>
+                                    <input type="number" id="age" name="age" min="0" max="120" placeholder="Entrez votre âge" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="activity">Niveau d'activité physique</label>
+                                    <select id="activity" name="activity" required>
+                                        <option value="">-- Choisir un niveau --</option>
+                                        <option value="sedentaire">Sédentaire (peu ou pas d'exercice)</option>
+                                        <option value="leger">Léger (exercice 1-2 fois/semaine)</option>
+                                        <option value="modere">Modéré (exercice 3-4 fois/semaine)</option>
+                                        <option value="actif">Actif (exercice 5-6 fois/semaine)</option>
+                                        <option value="tres-actif">Très actif (exercice quotidien intense)</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="checkbox-group">
+                                        <input type="checkbox" id="respiratory" name="respiratory" value="yes">
+                                        <label for="respiratory">J'ai des problèmes respiratoires</label>
+                                    </div>
+                                </div>
+
+                                <button type="submit" class="submit-button">Générer mon CASP</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="right-column">
+                    <div class="aqi-panel">
+                        <h2>Côte d'air de santé</h2>
+                        
+                        <div class="values-container">
+                            <div class="value-box">
+                                <div class="value-label">CAS Actuel</div>
+                                <div class="value-number" id="aqiValue">-</div>
+                                <div class="value-status" id="aqiStatus">-</div>
+                            </div>
+                            
+                            <div class="value-box" id="caspBox" style="display: none;">
+                                <div class="value-label">CASP (Personnalisé)</div>
+                                <div class="value-number" id="caspValue">-</div>
+                                <div class="value-status" id="caspStatus">-</div>
+                            </div>
+                        </div>
+
+                        <div class="combined-chart">
+                            <div class="aqi-bar" id="aqiBar" style="height: 0%;">
+                                CAS: -
+                            </div>
+                            <div class="casp-bar" id="caspBar" style="height: 0%; display: none;">
+                                CASP: -
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
